@@ -1,0 +1,13 @@
+{
+    "name": "imarc/craft-sass-plugin",
+    "description": "a SASS plugin for Craft",
+    "require": {
+        "leafo/scssphp": "0.0.10"
+    },
+    "authors": [
+        {
+            "name": "Kevin Hamer",
+            "email": "kevin@imarc.net"
+        }
+    ]
+}
