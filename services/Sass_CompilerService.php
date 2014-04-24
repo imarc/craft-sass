@@ -48,8 +48,8 @@ class Sass_CompilerService extends BaseApplicationComponent
 
 		$filename = realpath("$document_root/$filename");
 
-		if (file_exists("$document_root/$filename") && strpos($filename, $document_root) === 0) {
-			$scss = file_get_contents("$document_root/$filename");
+		if (file_exists($filename) && strpos($filename, $document_root) === 0) {
+			$scss = file_get_contents($filename);
 
 			$compiler = $this->getCompiler();
 			$compiler->setImportPaths($document_root);
