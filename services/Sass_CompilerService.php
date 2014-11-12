@@ -1,6 +1,7 @@
 <?php
 namespace Craft;
 
+use Exception;
 use scssc;
 
 /**
@@ -54,7 +55,23 @@ class Sass_CompilerService extends BaseApplicationComponent
 			$compiler = $this->getCompiler();
 			$compiler->setImportPaths($document_root);
 
-			return $compiler->compile($scss);
+			try {
+				return $compiler->compile($scss);
+			} catch (Exception $e) {
+				$msg = $e->getFile() . ":\n\n";
+				$msg .= $e->getMessage();
+				$msg = str_replace(array("'", "\n"), array("\\'", "\\A"), $msg);
+				return "body { display: none !important; }
+					html:after {
+						background: white;
+						color: black;
+						content: '$msg';
+						display: block !important;
+						font-family: Mono;
+						padding: 1em;
+						white-space: pre;
+					}";
+			}
 		}
 	}
 }
