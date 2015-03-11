@@ -7,9 +7,9 @@
     "license": "Apache",
     "authors": [
         {"name": "Kevin Hamer", "email": "kevin@imarc.net"}
-    ]
+    ],
 
     "require": {
         "leafo/scssphp": "0.0.10"
-    },
+    }
 }
