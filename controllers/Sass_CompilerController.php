@@ -12,6 +12,8 @@ namespace Craft;
  */
 class Sass_CompilerController extends BaseController
 {
+    protected $allowAnonymous = true;
+
     /**
      * GET Requests to /actions/sass/compiler/sass are routed here.
      *
