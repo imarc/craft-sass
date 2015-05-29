@@ -47,7 +47,7 @@ class Sass_CompilerService extends BaseApplicationComponent
      */
     public function compile($filename)
     {
-        $document_root = dirname(craft()->request->getScriptFile());
+        $document_root = $_SERVER['DOCUMENT_ROOT'];
 
         $filename = realpath("$document_root/$filename");
 
