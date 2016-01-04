@@ -12,6 +12,9 @@ namespace Craft;
  */
 class Sass_CompilerController extends BaseController
 {
+    /**
+     * Without this, all actions default to requiring a login.
+     */
     protected $allowAnonymous = true;
 
     /**

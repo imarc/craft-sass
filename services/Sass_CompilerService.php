@@ -8,7 +8,7 @@
 namespace Craft;
 
 use Exception;
-use scssc;
+use Leafo\ScssPhp\Server;
 
 /**
  * Sass_CompilerService is a Craft plugin service that exposes the sass
@@ -17,26 +17,36 @@ use scssc;
 class Sass_CompilerService extends BaseApplicationComponent
 {
     /**
-     * compiler is an instance of scssc;
+     * compiler is an instance of Leafo\ScssPhp\Server;
      *
-     * @var scssc
+     * @var server
      */
-    protected $compiler = null;
+    static private $scss_server = null;
 
     /**
-     * getCompiler() reurns and instance of scssc, constructing one if
+     * server() returns an instance of Leafo\ScssPhp\Server, constructing it if
      * necessary.
      *
-     * @return scssc
+     * If you provide an instance of Server as argument, it uses that instead.
+     *
+     * @return Server
      */
-    public function getCompiler()
+    static public function server($instance=null)
     {
-        if ($this->compiler === null) {
-            include dirname(__DIR__) . '/vendor/autoload.php';
-            $this->compiler = new scssc();
+        if ($instance !== null) {
+            static::$scss_server = $instance;
+        } elseif (static::$scss_server === null) {
+            include __DIR__ . '/../vendor/autoload.php';
+
+            static::$scss_server = new Server(
+                dirname(craft()->request->getScriptFile()),
+                dirname(craft()->request->getScriptFile()) . '/writable/scss_cache'
+            );
+
+			static::$scss_server->showErrorsAsCSS();
         }
 
-        return $this->compiler;
+        return static::$scss_server;
     }
 
     /**
@@ -47,35 +57,13 @@ class Sass_CompilerService extends BaseApplicationComponent
      */
     public function compile($filename)
     {
-        $document_root = dirname(craft()->request->getScriptFile());
+        $_GET['p'] = $filename;
 
-        $filename = realpath("$document_root/$filename");
+        ob_start();
+        static::server()->serve();
+        $css = ob_get_contents();
+        ob_end_clean();
 
-        if (file_exists($filename) && strpos($filename, $document_root) === 0) {
-            $scss = file_get_contents($filename);
-
-            $compiler = $this->getCompiler();
-            $compiler->setImportPaths($document_root);
-
-            try {
-
-                return $compiler->compile($scss);
-
-            } catch (Exception $e) {
-                $msg = $e->getFile() . ":\n\n";
-                $msg .= $e->getMessage();
-                $msg = str_replace(array("'", "\n"), array("\\'", "\\A"), $msg);
-                return "body { display: none !important; }
-                    html:after {
-                        background: white;
-                        color: black;
-                        content: '$msg';
-                        display: block !important;
-                        font-family: Mono;
-                        padding: 1em;
-                        white-space: pre;
-                    }";
-            }
-        }
+        return $css;
     }
 }
