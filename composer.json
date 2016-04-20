@@ -2,7 +2,7 @@
     "name": "imarc/craft-sass",
     "description": "A Craft plugin that compiles SASS on the server as needed.",
     "homepage": "https://github.com/imarc/craft-sass",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "type": "library",
     "license": "Apache",
     "authors": [
