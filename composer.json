@@ -2,14 +2,15 @@
     "name": "imarc/craft-sass",
     "description": "A Craft plugin that compiles SASS on the server as needed.",
     "homepage": "https://github.com/imarc/craft-sass",
-    "version": "1.0.2",
-    "type": "library",
+    "version": "1.0.3",
+    "type": "craft-plugin",
     "license": "Apache",
     "authors": [
         {"name": "Kevin Hamer", "email": "kevin@imarc.net"}
     ],
 
     "require": {
-        "leafo/scssphp": "^0.1.1"
+        "leafo/scssphp": "^0.1.1",
+        "composer/installers": "~1.0"
     }
 }
