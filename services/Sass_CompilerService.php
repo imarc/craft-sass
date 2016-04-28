@@ -36,8 +36,6 @@ class Sass_CompilerService extends BaseApplicationComponent
         if ($instance !== null) {
             static::$scss_server = $instance;
         } elseif (static::$scss_server === null) {
-            include __DIR__ . '/../vendor/autoload.php';
-
             static::$scss_server = new Server(
                 dirname(craft()->request->getScriptFile()),
                 dirname(craft()->request->getScriptFile()) . '/writable/scss_cache'

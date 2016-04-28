@@ -1,7 +1,7 @@
 <?php
 /**
- * @copyright 2015 iMarc LLC
- * @author Kevin Hamer [kh] <kevin@imarc.net>
+ * @copyright 2016 Imarc
+ * @author Kevin Hamer [kh] <kevin@imarc.com>
  * @license Apache (see LICENSE file)
  */
 
@@ -13,9 +13,16 @@ namespace Craft;
  */
 class SassPlugin extends BasePlugin
 {
+    public function init()
+    {
+        require_once CRAFT_BASE_PATH . '../vendor/autoload.php';
+
+        return parent::init();
+    }
+
     public function getName()
     {
-        return Craft::t('Sass: Syntactically Awesome Style Sheeets');
+        return Craft::t('Sass: Syntactically Awesome Style Sheets');
     }
 
     public function getVersion()
@@ -25,11 +32,11 @@ class SassPlugin extends BasePlugin
 
     public function getDeveloper()
     {
-        return 'iMarc';
+        return 'Imarc';
     }
 
     public function getDeveloperUrl()
     {
-        return 'http://www.imarc.net';
+        return 'https://www.imarc.com';
     }
 }
