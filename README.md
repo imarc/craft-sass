@@ -3,16 +3,17 @@ Sass Plugin for Craft
 
 This is a Sass plugin for Craft using [scssphp](http://leafo.net/scssphp/).
 
-It compiles SASS to CSS on the fly.
+It compiles SASS to CSS on the fly, and caches the results to disk until the file changes.
 
 
 Installation
 ------------
 
-0. Extract this plugin in your craft/plugins directory, in a directory named 'sass'.
-0. From this directory, run [composer](https://getcomposer.org/) to get the dependencies for this plugin.
-0. Upload the whole directory, including the dependencies, to your server.
-0. Hop over into the Craft Plugins panel and enable it.
+Installation requires [composer](https://getcomposer.org/). This plugn also is makes use of [composer/installers](https://github.com/composer/installers) to make the plugin composer compatible.
+
+1. In the **root** of your project, run `composer require imarc/craft-sass`.This will create a `vendor/` directory as well as automatically put the plugin it self in `craft/plugins/sass/`.
+2. Upload both the `vendor/` and `craft/plugins/sass/` directories.
+3. Enable the plugin in the Craft Plugins panel.
 
 
 Usage
