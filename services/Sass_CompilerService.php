@@ -7,11 +7,10 @@
 
 namespace Craft;
 
-use Exception;
 use Leafo\ScssPhp\Server;
 
 /**
- * Sass_CompilerService is a Craft plugin service that exposes the sass
+ * Sass_Compileview-source:rService is a Craft plugin service that exposes the sass
  * compiler to Sass_CompilerController.
  */
 class Sass_CompilerService extends BaseApplicationComponent
@@ -21,7 +20,7 @@ class Sass_CompilerService extends BaseApplicationComponent
      *
      * @var server
      */
-    static private $scss_server = null;
+    private static $scss_server = null;
 
     /**
      * server() returns an instance of Leafo\ScssPhp\Server, constructing it if
@@ -31,17 +30,20 @@ class Sass_CompilerService extends BaseApplicationComponent
      *
      * @return Server
      */
-    static public function server($instance=null)
+    public static function server($instance = null)
     {
         if ($instance !== null) {
             static::$scss_server = $instance;
         } elseif (static::$scss_server === null) {
+            $sass_cache_dir = craft()->path->getStoragePath() . '/scss_cache';
+            IOHelper::ensureFolderExists($sass_cache_dir);
+
             static::$scss_server = new Server(
                 dirname(craft()->request->getScriptFile()),
-                dirname(craft()->request->getScriptFile()) . '/writable/scss_cache'
+                $sass_cache_dir
             );
 
-			static::$scss_server->showErrorsAsCSS();
+            static::$scss_server->showErrorsAsCSS();
         }
 
         return static::$scss_server;
