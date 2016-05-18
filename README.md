@@ -32,7 +32,7 @@ Linking to that file from a twig template should look something like this:
 Tests
 -----
 
-To run the tests, be sure you have phpunit install and then:
+To run the tests, be sure you have phpunit installed and then:
 
 ```
 composer install
