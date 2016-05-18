@@ -28,3 +28,13 @@ Linking to that file from a twig template should look something like this:
 ```
 
 `craft.sass.link()` generates a link that is routed to the plugin, which in turn compiles the SASS file into CSS.
+
+Tests
+-----
+
+To run the tests, be you have phpunit install and then:
+
+```
+composer install
+phpunit
+```
