@@ -1,7 +1,10 @@
-$sampleColor: #123;
+@import 'imports/import.scss';
+
+$textColor: #123;
 
 ul {
     li {
-        color: $sampleColor;
+        color: $textColor;
+        background: $backgroundColor;
     }
 }
