@@ -35,6 +35,6 @@ class SassVariable
      */
     public function link($filename)
     {
-        return UrlHelper::getActionUrl('sass/compiler/sass', ['filename' => $filename]);
+        return UrlHelper::getActionUrl('sass/compiler/sass', array('filename' => $filename));
     }
 }
