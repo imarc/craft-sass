@@ -39,7 +39,7 @@ class Sass_CompilerService extends BaseApplicationComponent
             IOHelper::ensureFolderExists($sass_cache_dir);
 
             static::$scss_server = new Server(
-                dirname(craft()->request->getScriptFile()),
+                 $_SERVER['DOCUMENT_ROOT'],
                 $sass_cache_dir
             );
 
